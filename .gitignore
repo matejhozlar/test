@@ -1,0 +1,24 @@
+# Server
+/test/node_modules/
+/node_modules/
+/docker/node_modules/
+
+# Client
+/client/manual.docx
+/client/public/manual.html
+
+.env
+
+/logs/
+
+tmp.txt
+fonts.zip
+
+# docs
+/docs
+
+# docker output
+/output
+
+# build
+/build
