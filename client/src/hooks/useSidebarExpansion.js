@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export const useSidebarExpansion = (activeId, sectionsData) => {
   const [expandedSections, setExpandedSections] = useState({});
-  const isNavigatingRef = useRef(false);
 
   const handleExpandSection = (sectionId, expand) => {
     setExpandedSections((prev) => ({
@@ -12,25 +11,27 @@ export const useSidebarExpansion = (activeId, sectionsData) => {
   };
 
   useEffect(() => {
-    if (!activeId || isNavigatingRef.current) return;
-
-    const newExpanded = { ...expandedSections };
+    if (!activeId) return;
 
     const topLevel = sectionsData.find((sec) => sec.id === activeId);
     if (topLevel) {
-      newExpanded[topLevel.id] = true;
+      setExpandedSections((prev) => ({
+        ...prev,
+        [topLevel.id]: true,
+      }));
     } else {
       for (const sec of sectionsData) {
         const sub = sec.subsections?.find((s) => s.id === activeId);
         if (sub) {
-          newExpanded[sec.id] = true;
+          setExpandedSections((prev) => ({
+            ...prev,
+            [sec.id]: true,
+          }));
           break;
         }
       }
     }
-
-    setExpandedSections(newExpanded);
-  }, [activeId, expandedSections, sectionsData]);
+  }, [activeId, sectionsData]);
 
   return { expandedSections, handleExpandSection };
 };

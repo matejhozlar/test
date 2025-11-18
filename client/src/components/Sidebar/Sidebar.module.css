@@ -13,10 +13,17 @@
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.25);
 }
 
+@media (min-width: 769px) {
+  .sidebar {
+    transform: none !important;
+    position: sticky !important;
+    display: flex !important;
+  }
+}
+
 .header {
   position: sticky;
   top: 0;
-  background-color: #f9f9f9;
   z-index: 2;
   padding: 15px 0;
   border-bottom: 1px solid #eee;
@@ -24,6 +31,7 @@
 
 .contents {
   font-size: 12px;
+  margin-top: 12px;
   margin-bottom: 12px;
   letter-spacing: 1.5px;
   padding: 0;
@@ -170,27 +178,14 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   padding-right: 8px;
   scroll-behavior: smooth;
 }
 
 .scrollable::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scrollable::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scrollable::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 3px;
-}
-
-.scrollable::-webkit-scrollbar-thumb:hover {
-  background-color: #999;
+  display: none;
 }
 
 .footer {
@@ -232,60 +227,20 @@
   padding: 6px 12px;
 }
 
-.drawer {
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
-
-.drawer.open {
-  transform: translateX(0);
-}
-
 .toggle {
   display: none;
-  background: var(--primary-red);
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  font-size: 20px;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .outsideToggle {
   display: none;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1003;
-  background: var(--primary-red);
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  font-size: 20px;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .stickyTop {
   display: none;
-  position: sticky;
-  top: 0;
-  background: #f9f9f9;
-  z-index: 10;
-  padding: 10px;
-  justify-content: flex-end;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  animation: fadeIn 0.2s ease;
+  display: none;
 }
 
 @keyframes fadeIn {
@@ -297,6 +252,7 @@
   }
 }
 
+/* Tablet and Mobile */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -308,21 +264,59 @@
     z-index: 1002;
     background-color: #f9f9f9;
     padding: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .drawer.open {
+    transform: translateX(0);
   }
 
   .stickyTop {
     display: flex;
+    position: sticky;
+    top: 0;
+    background: #f9f9f9;
+    z-index: 10;
+    padding: 10px;
+    justify-content: flex-end;
   }
 
   .toggle {
     display: block;
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   .outsideToggle {
     display: block;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1003;
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
-  .drawer {
-    display: flex;
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
   }
 }
