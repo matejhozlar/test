@@ -44,7 +44,7 @@ export const queries = {
     "DELETE FROM user_documents WHERE user_id = ? AND document_id = ?"
   ),
   getDocumentUsers: db.prepare(
-    "SELECT u.id, u.username FROM users u INNER JOIN user_documents ud on ud.id = ud.user_id WHERE ud.document_id = ?"
+    "SELECT u.id, u.username FROM users u INNER JOIN user_documents ud ON u.id = ud.user_id WHERE ud.document_id = ?"
   ),
   clearUserDocuments: db.prepare(
     "DELETE FROM user_documents WHERE user_id = ?"

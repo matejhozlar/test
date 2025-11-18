@@ -22,6 +22,3 @@ CREATE TABLE IF NOT EXISTS user_documents (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
 );
-
-INSERT OR IGNORE INTO users (username, password_hash, is_admin) 
-VALUES ('admin', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5aeGJ6VO6uJEm', 1);

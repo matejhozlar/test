@@ -2,8 +2,10 @@ import dotenv from "dotenv";
 import logger from "./logger/index.js";
 import app from "./app/index.js";
 import { validateEnv } from "./config/env/validateEnv.js";
-validateEnv();
+
 dotenv.config();
+
+validateEnv();
 
 const PORT = process.env.PORT;
 

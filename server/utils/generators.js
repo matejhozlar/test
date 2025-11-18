@@ -11,7 +11,7 @@ export const generateString = (length = 16) => {
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
   let password = "";
 
-  for (let i = password.length; i <= length; i++) {
+  for (let i = 0; i < length; i++) {
     password += chars[crypto.randomInt(chars.length)];
   }
 

@@ -2,7 +2,7 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import rateLimit from "express-rate-limit";
 import { queries } from "../../db/index.js";
-import { generateToken, authenticateToken } from "../middleware/token.js";
+import { generateToken, authenticateToken } from "../middleware/auth.js";
 import logger from "../../logger/index.js";
 
 const router = Router();
@@ -15,7 +15,7 @@ const loginLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-router.post("/login", loginLimiter, async () => {
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const { username, password } = req.body;
 

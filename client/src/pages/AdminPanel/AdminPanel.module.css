@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: white;
+  border-right: 1px solid #e0e0e0;
+  padding: 2rem 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-family: "HoneywellSans-Bold", sans-serif;
+  padding: 0 1.5rem;
+  margin: 0 0 2rem 0;
+  color: var(--primary-text-color);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navButton {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--primary-text-color);
+  border-left: 3px solid transparent;
+}
+
+.navButton:hover {
+  background-color: #f5f5f5;
+}
+
+.navButton.active {
+  background-color: #e3f2fd;
+  border-left-color: var(--primary-blue);
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .navButton {
+    white-space: nowrap;
+  }
+}

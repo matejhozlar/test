@@ -1,8 +1,5 @@
-import dotenv from "dotenv";
 import logger from "../../logger/index.js";
 import REQUIRED_VARS from "./vars/requiredVars.js";
-
-dotenv.config();
 
 export function validateEnv() {
   let hasError = false;
