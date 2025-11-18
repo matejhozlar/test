@@ -46,8 +46,10 @@ const AdminPanel = () => {
         </div>
 
         <div className={styles.main}>
-          {activeTab === "users" && <UserManagement />}
-          {activeTab === "documents" && <DocumentManagement />}
+          <div className={styles.mainContent}>
+            {activeTab === "users" && <UserManagement />}
+            {activeTab === "documents" && <DocumentManagement />}
+          </div>
         </div>
       </div>
     </div>

@@ -1,24 +1,12 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth/useAuth.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          fontSize: "1.5rem",
-          color: "#666",
-        }}
-      >
-        Loading...
-      </div>
-    );
+    return <LoadingSpinner message="Loading..." />;
   }
 
   if (!user) {

@@ -14,11 +14,7 @@ function Header({ user, onLogout }) {
 
       {user && (
         <div className={styles.userSection}>
-          <span className={styles.username}>
-            {user.username}
-            {user.isAdmin && <span className={styles.adminBadge}>Admin</span>}
-          </span>
-          <button onClick={onLogout} className={styles.logoutButton}>
+          <button onClick={onLogout} className="btn" data-variant="secondary">
             Logout
           </button>
         </div>

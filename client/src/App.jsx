@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth/AuthProvider.jsx";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import Login from "./pages/Login/Login";
-import ManualViewer from "./pages/ManualViewer/ManualViewer";
-import AdminPanel from "./pages/AdminPanel/AdminPanel";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import Login from "./pages/Login/Login.jsx";
+import ManualViewer from "./pages/ManualViewer/ManualViewer.jsx";
+import AdminPanel from "./pages/AdminPanel/AdminPanel.jsx";
 
 function App() {
   return (

@@ -49,9 +49,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "HoneywellSans-Medium", "Inter", ui-sans-serif, system-ui,
-    -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue",
-    "Arial", "Noto Sans", sans-serif;
+  font-family: "HoneywellSans-Medium";
   overflow-x: hidden;
   line-height: 1.875rem;
   color: var(--primary-text-color);
@@ -256,4 +254,41 @@ tr.crit-advisory td strong {
 *:focus-visible {
   outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-family: "HoneywellSans-Bold";
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  line-height: 1;
+}
+
+.btn svg {
+  transform: translateY(-1px);
+}
+
+.btn {
+  background-color: var(--primary-blue);
+}
+
+.btn:hover {
+  background-color: var(--primary-blue-hover);
+}
+
+.btn[data-variant="secondary"] {
+  background-color: #f5f5f5;
+  color: var(--primary-text-color);
+}
+
+.btn[data-variant="secondary"]:hover {
+  background-color: #e0e0e0;
 }

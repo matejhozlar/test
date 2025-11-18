@@ -8,7 +8,7 @@
 .content {
   flex: 1;
   padding: 40px;
-  margin-top: 100px;
+  margin-top: var(--header-height);
   max-width: 1200px;
   width: 100%;
 }
@@ -73,7 +73,7 @@
 @media (max-width: 768px) {
   .content {
     padding: 20px;
-    margin-top: 100px;
+    margin-top: var(--header-height);
   }
 
   .content :global(p) {

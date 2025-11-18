@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Plus } from "lucide-react";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
@@ -174,18 +176,15 @@ const UserManagement = () => {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading users...</div>;
+    return <LoadingSpinner message="Loading users..." />;
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.title}>User Management</h2>
-        <button
-          className={styles.createButton}
-          onClick={() => setShowCreateModal(true)}
-        >
-          + Create User
+        <button className="btn" onClick={() => setShowCreateModal(true)}>
+          <Plus size={16} /> Create
         </button>
       </div>
 
@@ -294,13 +293,14 @@ const UserManagement = () => {
               <div className={styles.modalActions}>
                 <button
                   type="button"
-                  className={styles.cancelButton}
+                  className="btn"
+                  data-variant="secondary"
                   onClick={() => setShowCreateModal(false)}
                 >
                   Cancel
                 </button>
-                <button type="submit" className={styles.submitButton}>
-                  Create User
+                <button type="submit" className="btn">
+                  Create
                 </button>
               </div>
             </form>
@@ -332,17 +332,18 @@ const UserManagement = () => {
             <div className={styles.modalActions}>
               <button
                 type="button"
-                className={styles.cancelButton}
+                className="btn"
+                data-variant="secondary"
                 onClick={() => setShowAssignModal(false)}
               >
                 Cancel
               </button>
               <button
                 type="button"
-                className={styles.submitButton}
+                className="btn"
                 onClick={handleAssignDocuments}
               >
-                Save Assignment
+                Save
               </button>
             </div>
           </div>

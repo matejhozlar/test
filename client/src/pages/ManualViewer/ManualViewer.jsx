@@ -66,7 +66,7 @@ const ManualViewer = () => {
   }
 
   if (isLoading) {
-    return <div className={styles.loading}>Loading manual...</div>;
+    return <LoadingSpinner message="Loading manual..." />;
   }
 
   return (

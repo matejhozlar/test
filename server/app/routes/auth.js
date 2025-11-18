@@ -39,7 +39,7 @@ router.post("/login", loginLimiter, async (req, res) => {
 
     const token = generateToken(user);
 
-    res.cookie("auth-token", token, {
+    res.cookie("auth_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",

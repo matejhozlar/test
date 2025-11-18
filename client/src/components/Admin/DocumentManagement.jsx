@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./DocumentManagement.module.css";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { Plus } from "lucide-react";
 
 const DocumentManagement = () => {
   const [documents, setDocuments] = useState([]);
@@ -96,38 +98,27 @@ const DocumentManagement = () => {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading documents...</div>;
+    return <LoadingSpinner message="Loading documents..." />;
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.title}>Document Management</h2>
-        <button
-          className={styles.uploadButton}
-          onClick={() => setShowUploadModal(true)}
-        >
-          + Upload Document
+        <button className="btn" onClick={() => setShowUploadModal(true)}>
+          <Plus size={16} />
+          Upload
         </button>
       </div>
 
       {documents.length === 0 ? (
         <div className={styles.empty}>
           <p>No documents uploaded yet</p>
-          <button
-            className={styles.uploadButton}
-            onClick={() => setShowUploadModal(true)}
-          >
-            Upload Your First Document
-          </button>
         </div>
       ) : (
         <div className={styles.grid}>
           {documents.map((doc) => (
             <div key={doc.id} className={styles.card}>
-              <div className={styles.cardIcon}>
-                {doc.file_type === "html" ? "📄" : "📝"}
-              </div>
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{doc.display_name}</h3>
                 <p className={styles.cardMeta}>
@@ -146,7 +137,6 @@ const DocumentManagement = () => {
         </div>
       )}
 
-      {/* Upload Modal */}
       {showUploadModal && (
         <div className={styles.modal} onClick={() => setShowUploadModal(false)}>
           <div
@@ -167,9 +157,7 @@ const DocumentManagement = () => {
                   required
                   disabled={uploading}
                 />
-                <p className={styles.hint}>
-                  Supported formats: HTML, DOCX (max 50MB)
-                </p>
+                <p className={styles.hint}>Supported formats: HTML, DOCX</p>
               </div>
 
               <div className={styles.formGroup}>
@@ -189,7 +177,8 @@ const DocumentManagement = () => {
               <div className={styles.modalActions}>
                 <button
                   type="button"
-                  className={styles.cancelButton}
+                  className="btn"
+                  data-variant="secondary"
                   onClick={() => setShowUploadModal(false)}
                   disabled={uploading}
                 >
@@ -197,7 +186,7 @@ const DocumentManagement = () => {
                 </button>
                 <button
                   type="submit"
-                  className={styles.submitButton}
+                  className="btn"
                   disabled={uploading || !formData.file}
                 >
                   {uploading ? "Uploading..." : "Upload"}

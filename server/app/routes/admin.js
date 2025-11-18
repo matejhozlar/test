@@ -6,7 +6,7 @@ import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { queries } from "../../db/index.js";
 import { authenticateToken, requireAdmin } from "../middleware/auth.js";
-import { generateString } from "../../utils/generators.js";
+import { generatePassword, generateUsername } from "../../utils/generators.js";
 import logger from "../../logger/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -281,7 +281,7 @@ router.delete("/users/:userId/documents/:documentId", (req, res) => {
 
 router.get("/generate/username", (req, res) => {
   try {
-    const username = generateString(16);
+    const username = generateUsername();
     res.json({ username });
   } catch (error) {
     logger.error("Error generating username:", error);
@@ -291,8 +291,8 @@ router.get("/generate/username", (req, res) => {
 
 router.get("/generate/password", (req, res) => {
   try {
-    const length = parseInt(req.query.length) || 16;
-    const password = generateString(length);
+    const length = parseInt(req.query.length) || 32;
+    const password = generatePassword(length);
     res.json({ password });
   } catch (error) {
     logger.error("Error generating password:", error);

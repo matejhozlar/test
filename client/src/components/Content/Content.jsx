@@ -6,6 +6,7 @@ import { useDocumentParser } from "../../hooks/useDocumentParser";
 import { useSearch } from "../../hooks/useSearch";
 import { useScrollSync } from "../../hooks/useScrollSync";
 import { useSidebarExpansion } from "../../hooks/useSidebarExpansion";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import styles from "./Content.module.css";
 
 const Content = () => {
@@ -63,7 +64,7 @@ const Content = () => {
   }
 
   if (isLoading) {
-    return <div className={styles.loading}>Loading manual...</div>;
+    return <LoadingSpinner message="Loading manual..." />;
   }
 
   return (

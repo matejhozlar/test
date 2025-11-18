@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
 export const authenticateToken = (req, res, next) => {
   const token = req.cookies.auth_token;
 
@@ -10,7 +8,7 @@ export const authenticateToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -32,7 +30,7 @@ export const generateToken = (user) => {
       username: user.username,
       isAdmin: user.is_admin === 1,
     },
-    JWT_SECRET,
+    process.env.JWT_SECRET,
     { expiresIn: "24h" }
   );
 };
