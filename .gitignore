@@ -22,3 +22,5 @@ fonts.zip
 
 # build
 /build
+
+/server/db/app.db

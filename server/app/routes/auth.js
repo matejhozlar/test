@@ -1,8 +1,8 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import rateLimit from "express-rate-limit";
-import { queries } from "../../db";
-import { generateToken, authenticateToken } from "../middleware/token";
+import { queries } from "../../db/index.js";
+import { generateToken, authenticateToken } from "../middleware/token.js";
 import logger from "../../logger/index.js";
 
 const router = Router();
