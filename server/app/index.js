@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
+import documentRoutes from "./routes/documents.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/documents", documentRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 

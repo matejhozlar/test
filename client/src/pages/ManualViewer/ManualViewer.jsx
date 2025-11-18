@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth/useAuth.js";
 import Header from "../../components/Header/Header.jsx";
 import Sidebar from "../../components/Sidebar/Sidebar.jsx";
@@ -11,15 +12,52 @@ import { useSidebarExpansion } from "../../hooks/useSidebarExpansion.js";
 import styles from "./ManualViewer.module.css";
 
 const ManualViewer = () => {
+  const { documentId } = useParams();
+  const navigate = useNavigate();
   const [zoomedImg, setZoomedImg] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [documentData, setDocumentData] = useState(null);
+  const [documentError, setDocumentError] = useState(null);
   const contentRef = useRef(null);
   const { user, logout } = useAuth();
 
   const today = new Date();
   const year = today.getFullYear();
 
-  const { sectionsData, isLoading, error } = useDocumentParser("/manual.html");
+  useEffect(() => {
+    const fetchDocument = async () => {
+      try {
+        const response = await fetch(`/api/documents/${documentId}`, {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          if (response.status === 403) {
+            setDocumentError("You don't have access to this document");
+          } else if (response.status === 404) {
+            setDocumentError("Document not found");
+          } else {
+            setDocumentError("Failed to load document");
+          }
+          return;
+        }
+
+        const data = await response.json();
+        setDocumentData(data.document);
+      } catch (error) {
+        console.error("Error fetching document:", error);
+        setDocumentError("Failed to load document");
+      }
+    };
+
+    if (documentId) {
+      fetchDocument();
+    }
+  }, [documentId]);
+
+  const documentUrl = documentData ? documentData.file_path : null;
+
+  const { sectionsData, isLoading, error } = useDocumentParser(documentUrl);
 
   const { searchQuery, setSearchQuery, searchResults, highlightedHtml } =
     useSearch(sectionsData);
@@ -61,18 +99,59 @@ const ManualViewer = () => {
     };
   }, [zoomedImg]);
 
-  if (error) {
-    return <div className={styles.error}>Failed to load manual</div>;
+  const handleBackToDocuments = () => {
+    navigate("/");
+  };
+
+  if (documentError) {
+    return (
+      <div className={styles.app}>
+        <Header user={user} onLogout={logout} />
+        <div className={styles.errorContainer}>
+          <div className={styles.errorContent}>
+            <h2>{documentError}</h2>
+            <button
+              className={styles.backButton}
+              onClick={handleBackToDocuments}
+            >
+              ← Back to Documents
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  if (isLoading) {
-    return <LoadingSpinner message="Loading manual..." />;
+  if (!documentData || isLoading) {
+    return (
+      <div className={styles.app}>
+        <Header user={user} onLogout={logout} />
+        <div className={styles.loading}>Loading manual...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.app}>
+        <Header user={user} onLogout={logout} />
+        <div className={styles.error}>Failed to load manual</div>
+      </div>
+    );
   }
 
   return (
     <div className={styles.app}>
       <Header user={user} onLogout={logout} />
       <div className={styles.headerShadow} />
+
+      <div className={styles.documentHeader}>
+        <button className={styles.backButton} onClick={handleBackToDocuments}>
+          ← Back to Documents
+        </button>
+        <h2 className={styles.documentTitle}>{documentData.display_name}</h2>
+      </div>
+
       <div className={styles.layout}>
         <Sidebar
           isOpen={isSidebarOpen}

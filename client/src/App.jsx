@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth/AuthProvider.jsx";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
-import Login from "./pages/Login/Login.jsx";
-import ManualViewer from "./pages/ManualViewer/ManualViewer.jsx";
-import AdminPanel from "./pages/AdminPanel/AdminPanel.jsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Login from "./pages/Login/Login";
+import DocumentSelector from "./pages/DocumentSelector/DocumentSelector";
+import ManualViewer from "./pages/ManualViewer/ManualViewer";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
 
 function App() {
   return (
@@ -14,6 +15,15 @@ function App() {
 
           <Route
             path="/"
+            element={
+              <ProtectedRoute>
+                <DocumentSelector />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/manual/:documentId"
             element={
               <ProtectedRoute>
                 <ManualViewer />

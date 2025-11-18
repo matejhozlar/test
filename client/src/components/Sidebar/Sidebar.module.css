@@ -252,7 +252,6 @@
   }
 }
 
-/* Tablet and Mobile */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
